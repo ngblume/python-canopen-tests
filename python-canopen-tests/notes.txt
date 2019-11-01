@@ -1,0 +1,5 @@
+python canopen:
+
+- network.scanner: Scannen mittels SDo-Request auf Index 0x1000 (Device Type), Subindex 0x00
+  Sollte in jedem EDS daher enthalten sein !!
+- 

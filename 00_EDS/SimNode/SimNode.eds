@@ -59,7 +59,7 @@ ParameterName=Device type
 ObjectType=0x7
 DataType=0x0007
 AccessType=ro
-DefaultValue=0x000000AA
+DefaultValue=0x000000FF
 PDOMapping=0
 
 [OptionalObjects]
