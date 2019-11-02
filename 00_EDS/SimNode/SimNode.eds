@@ -2,10 +2,10 @@
 CreatedBy=NGB
 ModifiedBy=NGB
 Description=SimNode for testing
-CreationTime=11:57PM
-CreationDate=11-01-2019
-ModificationTime=11:57PM
-ModificationDate=11-01-2019
+CreationTime=11:01PM
+CreationDate=11-02-2019
+ModificationTime=11:01PM
+ModificationDate=11-02-2019
 FileName=SimNode.eds
 FileVersion=1
 FileRevision=1
@@ -63,14 +63,23 @@ DefaultValue=0x000000FF
 PDOMapping=0
 
 [OptionalObjects]
-SupportedObjects=1
+SupportedObjects=2
 1=0x1008
+2=0x1017
 
 [1008]
 ParameterName=Manufacturer Device Name
 ObjectType=0x7
 DataType=0x0009
 AccessType=const
+PDOMapping=0
+
+[1017]
+ParameterName=Producer Heartbeat Time
+ObjectType=0x7
+DataType=0x0006
+AccessType=rw
+DefaultValue=1500
 PDOMapping=0
 
 [ManufacturerObjects]
