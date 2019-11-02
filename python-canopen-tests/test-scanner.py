@@ -65,6 +65,32 @@ device_name_node_0x10 = remoteSimNode_0x10.sdo["Manufacturer Device Name"].data
 print('Manufacturer Device Name on Node 0x05: ', device_name_node_0x05)
 print('Manufacturer Device Name on Node 0x10: ', device_name_node_0x10)
 
+# Download a long string via BLOCK transfer to the node via file-like access
+data_0x05 = b'A really really long string on node 0x05...'
+# Open file-like access with options: writing, binary (string is converted to binary before transmitting)
+fp = remoteSimNode_0x05.sdo['FirmwareString'].open('wb', size=len(data_0x05), block_transfer=True)
+fp.write(data_0x05)
+fp.close()
+
+# Download a long string via BLOCK transfer to the node via file-like access
+data_0x10 = b'A really really long string on node 0x10...'
+# Open file-like access with options: writing, binary (string is converted to binary before transmitting)
+fp = remoteSimNode_0x10.sdo['FirmwareString'].open('wb', size=len(data_0x10), block_transfer=True)
+fp.write(data_0x10)
+fp.close()
+
+# Upload a long string via BLOCK transfer from the node via file-like access
+fp = remoteSimNode_0x05.sdo['FirmwareString'].open('r', block_transfer=True)
+readback_data_0x05 = fp.read()
+fp.close()
+print('Firmware String on Node 0x05: ', readback_data_0x05)
+
+# Upload a long string via BLOCK transfer from the node via file-like access
+fp = remoteSimNode_0x10.sdo['FirmwareString'].open('r', block_transfer=True)
+readback_data_0x10 = fp.read()
+fp.close()
+print('Firmware String on Node 0x10: ', readback_data_0x10)
+
 # Disconnect networks from CAN bus
 network_real.disconnect()
 network_sim.disconnect()

@@ -74,4 +74,12 @@ AccessType=const
 PDOMapping=0
 
 [ManufacturerObjects]
-SupportedObjects=0
+SupportedObjects=1
+1=0x2000
+
+[2000]
+ParameterName=FirmwareString
+ObjectType=0x7
+DataType=0x0009
+AccessType=rw
+PDOMapping=0
