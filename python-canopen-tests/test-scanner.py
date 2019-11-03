@@ -36,7 +36,7 @@ if (USE_EXISTING_BUS == True):
     network_real.bus = can_bus
 else:
     # Connect network_real to specific CAN bus 
-    network_real.connect(channel='can0', bustype='socketcan')
+    network_real.connect(channel='can0', bustype='socketcan', bitrate=250000)
 
 # Add simulated note to network_real
 remoteSimNode_0x05 = network_real.add_node(0x05, EDS_PATH)
@@ -59,10 +59,11 @@ localSimNode_0x10 = network_sim.create_node(0x10, EDS_PATH)
 
 # =====================================================================================================================================
 if (USE_EXISTING_BUS == True):
-    # Add network listeners to created bus
-    bus_listeners = [can.Printer()] + network_real.listeners + network_sim.listeners
-    # Start the notifier
-    notifier = can.Notifier(can_bus, bus_listeners, 0.5)
+    # Add network listeners to created bus and start the notifier
+    notifier = can.Notifier(can_bus, [can.Printer()] + network_real.listeners + network_real.listeners, 0.5)
+    # Add notifier from canopen to notifers of bus
+    # can.Notifier.add_listener(listener for listener in network_real.listeners)
+    # can.Notifier.add_listener(listener for listener in network_sim.listeners)
 
 # =====================================================================================================================================
 # Set Index 0x1000-Subindex 0x00, which is scanned by scanner.search()
