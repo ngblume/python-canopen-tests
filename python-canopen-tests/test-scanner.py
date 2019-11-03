@@ -10,24 +10,33 @@ import os
 # =====================================================================================================================================
 EDS_PATH = os.path.join(os.path.dirname(__file__), '../00_EDS/SimNode/SimNode.eds')
 
+# Set if existing bus should be used
+USE_EXISTING_BUS = False
+
 # Set logging level
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 # =====================================================================================================================================
-# Create bus (using SocketCAN, can0 and a bit rate of 250 kB/s)
-can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
-# can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
+# Define simple callbackfunction for receiving message of specific ID
+def _recv_callback(can_id, data, timestamp):
+    print('CAN-ID: ', hex(can_id), ' - Data: ', data, '- Timestamp: ', timestamp)
+
+# =====================================================================================================================================
+if (USE_EXISTING_BUS == True):
+    # Create bus (using SocketCAN, can0 and a bit rate of 250 kB/s)
+    can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
+    # can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
 
 # =====================================================================================================================================
 # Create network_real
 network_real = canopen.Network()
 
-# Assign network to previoulyly created bus
-network_real.bus = can_bus
-
-# Connect network_real to specific CAN bus 
-# > notnecessary anymore, since bus instance can_bus is used
-# network_real.connect(channel='can0', bustype='socketcan')
+if (USE_EXISTING_BUS == True):
+    # Assign network to previoulyly created bus
+    network_real.bus = can_bus
+else:
+    # Connect network_real to specific CAN bus 
+    network_real.connect(channel='can0', bustype='socketcan')
 
 # Add simulated note to network_real
 remoteSimNode_0x05 = network_real.add_node(0x05, EDS_PATH)
@@ -37,22 +46,23 @@ remoteSimNode_0x10 = network_real.add_node(0x10, EDS_PATH)
 # Create network_sim = network used to CREATE simulated nodes
 network_sim = canopen.Network()
 
-# Assign network to bus
-network_sim.bus = can_bus
-
-# Connect network_sim to same CAN bus
-# > notnecessary anymore, since bus instance can_bus is used
-# network_sim.connect(channel='can0', bustype='socketcan')
+if (USE_EXISTING_BUS == True):
+    # Assign network to bus
+    network_sim.bus = can_bus
+else:
+    # Connect network_sim to same CAN bus
+    network_sim.connect(channel='can0', bustype='socketcan')
 
 # Create simulated nodes (via network_sim) > called "local"
 localSimNode_0x05 = network_sim.create_node(0x05, EDS_PATH)
 localSimNode_0x10 = network_sim.create_node(0x10, EDS_PATH)
 
 # =====================================================================================================================================
-# Add network listeners to created bus
-bus_listeners = [can.Printer()] + network_real.listeners + network_sim.listeners
-# Start the notifier
-notifier = can.Notifier(can_bus, bus_listeners, 0.5)
+if (USE_EXISTING_BUS == True):
+    # Add network listeners to created bus
+    bus_listeners = [can.Printer()] + network_real.listeners + network_sim.listeners
+    # Start the notifier
+    notifier = can.Notifier(can_bus, bus_listeners, 0.5)
 
 # =====================================================================================================================================
 # Set Index 0x1000-Subindex 0x00, which is scanned by scanner.search()
@@ -65,6 +75,7 @@ localSimNode_0x05.sdo["Manufacturer Device Name"].raw = "Device-Node 0x05"
 localSimNode_0x10.sdo["Manufacturer Device Name"].raw = "Device-Node 0x10"
 
 # =====================================================================================================================================
+print('Testing stuff with heartbeat > see CAN log, i.e. WireShark')
 # Set nodes to different states for both nodes with different timing
 localSimNode_0x05.nmt.state = 'INITIALISING'
 # When node transistions from INITIALIZING to PRE-OPERATIONAL, heartbeat will start automatically with current value of 0x1017
@@ -154,22 +165,22 @@ active_objects_node_0x10 = remoteSimNode_0x10.emcy.active
 print('Active EMCYs for Node 0x05: ', active_objects_node_0x05)
 print('Active EMCYs for Node 0x10: ', active_objects_node_0x10)
 # Trigger one error per node
-print('Trigger one EMCYs per node and wait 5 sec...')
+print('Trigger one EMCYs per node and wait 3 sec...')
 localSimNode_0x05.emcy.send(0x3001, register=4, data=b"Under")
 localSimNode_0x10.emcy.send(0x1001, register=1, data=b"MEGAA")
-time.sleep(5)
+time.sleep(3)
 # Read errors from node objects (complete objects)
 active_objects_node_0x05 = remoteSimNode_0x05.emcy.active
 active_objects_node_0x10 = remoteSimNode_0x10.emcy.active
 # Print for debugging
 print('Active EMCYs for Node 0x05: ', active_objects_node_0x05)
 print('Active EMCYs for Node 0x10: ', active_objects_node_0x10)
-time.sleep(5)
+time.sleep(1)
 # Reset error per node
-print('Reset EMCYs per node and wait 5 sec...')
+print('Reset EMCYs per node and wait 3 sec...')
 localSimNode_0x05.emcy.reset(register=4, data=b"CLEAR")
 localSimNode_0x10.emcy.reset(register=1, data=b"CLEAR")
-time.sleep(5)
+time.sleep(3)
 # Read errors from node objects (complete objects)
 active_objects_node_0x05 = remoteSimNode_0x05.emcy.active
 active_objects_node_0x10 = remoteSimNode_0x10.emcy.active
@@ -189,11 +200,46 @@ for emcy in log_objects_node_0x05:
 print('EMCYs LOG for Node 0x10 (extended):')
 for emcy in log_objects_node_0x10:
     print(emcy)
+# Reset logs for node 0x10 in python-canopen
+remoteSimNode_0x10.emcy.reset()
+# Read error log from node objects (complete objects)
+log_objects_node_0x05 = remoteSimNode_0x05.emcy.log
+log_objects_node_0x10 = remoteSimNode_0x10.emcy.log
+# Print for debugging
+print('EMCYs LOG for Node 0x05: ', log_objects_node_0x05)
+print('EMCYs LOG for Node 0x10: ', log_objects_node_0x10)
 
 # =====================================================================================================================================
 time.sleep(1)
-# Wait on msg with specific ID
+# Directly send messages
+# Standard ID range
+network_real.send_message(0x1FF, [0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF])
+# Extended ID range
+network_real.send_message(0x1FFFF, [0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF])
 
+# =====================================================================================================================================
+time.sleep(1)
+# Subscribe to CAN ID 0x10A via callback
+network_real.subscribe(0x10A, _recv_callback)
+print('Subscribe to CAN ID 0x10A with callback...')
+print('Subscription active for next 15 seconds...')
+# Wait for callback to be triggered by sending msg from different system on bus
+time.sleep(15)
+
+# Unsubscribe from CAN ID 0x10A with identical callback (other callbacks will not be removed)
+network_real.unsubscribe(0x10A, _recv_callback)
+print('Unsubscribed...')
+
+# Subscribe to CAN ID 0x10AFF via callback
+network_real.subscribe(0x10AFF, _recv_callback)
+print('Subscribe to CAN ID 0x10AFF with callback...')
+print('Subscription active for next 15 seconds...')
+# Wait for callback to be triggered by sending msg from different system on bus
+time.sleep(15)
+
+# Unsubscribe from CAN ID 0x10A with identical callback (other callbacks will not be removed)
+network_real.unsubscribe(0x10AFF, _recv_callback)
+print('Unsubscribed...')
 
 # =====================================================================================================================================
 time.sleep(20)
