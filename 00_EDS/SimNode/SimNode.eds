@@ -92,3 +92,16 @@ ObjectType=0x7
 DataType=0x0009
 AccessType=rw
 PDOMapping=0
+
+[2001]
+ParameterName=ReadRawValue
+ObjectType=0x9
+SubNumber=1
+
+[2001Sub0]
+ParameterName=Temperature
+ObjectType=0x7
+DataType=0x0008
+AccessType=ro
+DefaultValue=0
+PDOMapping=0

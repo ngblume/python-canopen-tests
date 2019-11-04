@@ -12,7 +12,7 @@ class teststand_canopen():
     """ Class containing functions and interface to utilize python-canopen from TestStand """
 
     # =====================================================================================================================================
-    def __init__(self, use_sep_bus_object=False, adapter='socketcan'):
+    def __init__(self, use_sep_bus_object=False, adapter='socketcan', channel='can0', bitrate=250000):
         """ 
         :param boolean use_sep_bus_object:
             Select wether a seperate bus object should be created and used.
@@ -24,37 +24,59 @@ class teststand_canopen():
         """
 
         # Init variables
-        self.USE_EXISTING_BUS = False
-        self.network = canopen.Network()
+        self.use_sep_bus_object = use_sep_bus_object
+        self.adapter = adapter
+        self.channel = channel
+        self.bitrate = bitrate
 
-        # Check if seperate bus object should be used and set constant accordingly
-        if use_sep_bus_object:
-            self.USE_EXISTING_BUS = True
+        # Create network
+        self.network = canopen.Network()
         
-        # Create the separate bus if requester
-        if (self.USE_EXISTING_BUS == True):
-            if adapter == 'socketcan':
-                # for SocketCAN, can0 and a bit rate of 250 kB/s)
-                self.can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
-            else if adapter == 'pcan':
-                # for PCAN API (USBBUS1 and bit rate 250 kB/s)
-                self.can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000) 
-            else:
-                print('ERROR: incorrect adapter specified > ToDo: raise exception')
+        # Create the separate bus if requested
+        if (self.use_sep_bus_object == True):
+            self.CreateBus()
 
         # Connect network
-        if (self.USE_EXISTING_BUS == True):
+        self.Connect()
+
+    def __del__(self):
+        # body of destructor
+        self.Disconnect
+
+    # =====================================================================================================================================
+    # Define simple callbackfunction for receiving message of specific ID > UseCase: RecordSpecificID()
+    def _recv_callback(can_id, data, timestamp):
+        print('CAN-ID: ', hex(can_id), ' - Data: ', data, '- Timestamp: ', timestamp)
+
+    # =====================================================================================================================================
+    # Connect 
+    def Connect(self):
+        if (self.use_sep_bus_object == True):
             # Assign network to previoulyly created bus
-            self.network.bus = can_bus
+            self.network.bus = self.can_bus
         else:
-            if adapter == 'socketcan':
-                # for SocketCAN, can0 and a bit rate of 250 kB/s)
-                self.network.connect(bustype='socketcan', channel='can0', bitrate=250000)
-            else if adapter == 'pcan':
-                # for PCAN API (USBBUS1 and bit rate 250 kB/s)
-                self.network.connect(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000) 
-            else:
-                print('ERROR: incorrect adapter specified > ToDo: raise exception')
+            self.network.connect(bustype=self.adapter, channel=self.channel, bitrate=self.bitrate) 
+
+    # =====================================================================================================================================
+    def Disconnect(self):
+        time.sleep(3)
+        # Disconnect networks from CAN bus
+        self.network.disconnect()
+    
+    # =====================================================================================================================================
+    def CreateBus(self):
+        self.can_bus = can.interface.Bus(bustype=self.adapter, channel=self.channel, bitrate=self.bitrate)
+
+    # =====================================================================================================================================
+    def Scanner(self):
+        # Scan network with scanner via Index 0x1000 Subindex 0x00
+        self.network.scanner.search()
+        # Wait for nodes to respond
+        time.sleep(1)
+        # for node_id in self.network.scanner.nodes:
+        #     print('Found node: ', hex(node_id))
+        
+        return self.network.scanner.nodes
 
     # =====================================================================================================================================
     def AddNode(self, node_id=0x00, object_dictionary=None):
@@ -75,6 +97,7 @@ class teststand_canopen():
         # Return node object for further use
         return node
 
+    # =====================================================================================================================================
     def SDO_Upload(self, node_id=0x00, mode='expedited', index=0x1000, subindex=0x00, timeout = 2.0):
         """ 
         :param uint8 node_id:
@@ -89,11 +112,11 @@ class teststand_canopen():
         self.network[node_id].sdo.RESPONSE_TIMEOUT = timeout
         if mode=='expedited':
             # SDO upload via expedited transfer
-            result = self.network[node_id].sdo[index][subindex].raw
-        else if mode == 'segmented':
+            result = self.network[node_id].sdo[index].raw
+        elif mode == 'segmented':
             # SDO upload via segmented transfer
             result = self.network[node_id].sdo[index][subindex].data
-        else if mode == 'block-filelike':
+        elif mode == 'block-filelike':
             # Upload a long string via BLOCK transfer from the node via file-like access
             self.fp = self.network[node_id].sdo[index][subindex].open('r', block_transfer=True)
             result = fp.read()
@@ -101,20 +124,11 @@ class teststand_canopen():
         else:
             print('ERROR: SDO mode specified with unknown option')
 
-    def SDO_Download(self, node_id=0x00, mode='expedited', index=0x1000, subindex=0x00, timeout = 2.0, data):
+    # =====================================================================================================================================
+    # def SDO_Download():
 
-    # def SearchSpecificID():
+    # def RecordSpecificID():
 
     # def EmcyListActive():
     
     # def EmcyListLog():
-
-    # Create network_sim = network used to CREATE simulated nodes
-    network_sim = canopen.Network()
-
-    # Connect network_sim to same CAN bus
-    network_sim.connect(channel='can0', bustype='socketcan')
-
-    # Create simulated nodes (via network_sim) > called "local"
-    localSimNode_0x05 = network_sim.create_node(0x05, EDS_PATH)
-    localSimNode_0x10 = network_sim.create_node(0x10, EDS_PATH)
