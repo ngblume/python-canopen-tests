@@ -40,7 +40,6 @@ class teststand_canopen():
         self.Connect()
 
     def __del__(self):
-        # body of destructor
         self.Disconnect
 
     # =====================================================================================================================================
@@ -106,29 +105,52 @@ class teststand_canopen():
             Specify which mode should be used
             Options: 'expedited', 'segmented', 'block-filelike'
         :return:
-            The Node object that was added.
-        :rtype: canopen.RemoteNode
+            Data received for the SDO request.
         """
+        # TODO: Erweiterung um Abfrage von SDOs mittels Parameter-Namen - Auflösung über OD ??
+
         self.network[node_id].sdo.RESPONSE_TIMEOUT = timeout
-        if mode=='expedited':
-            # SDO upload via expedited transfer
-            result = self.network[node_id].sdo[index].raw
-        elif mode == 'segmented':
-            # SDO upload via segmented transfer
-            result = self.network[node_id].sdo[index][subindex].data
+        if mode=='expedited' OR mode == 'segmented':
+            # SDO upload via expedited OR segmented transfer
+            result = self.network[node_id].sdo.upload(index, subindex)
         elif mode == 'block-filelike':
             # Upload a long string via BLOCK transfer from the node via file-like access
-            self.fp = self.network[node_id].sdo[index][subindex].open('r', block_transfer=True)
+            self.fp = self.network[node_id].sdo.open(index, subindex, 'rb', block_transfer=True)
             result = fp.read()
             fp.close()
         else:
-            print('ERROR: SDO mode specified with unknown option')
+            print('ERROR: SDO upload mode specified with unknown option')
 
     # =====================================================================================================================================
-    # def SDO_Download():
+    def SDO_Download(self, node_id=0x00, mode='expedited', index=0x1000, subindex=0x00, timeout = 2.0, data):
+                """ 
+        :param uint8 node_id:
+            Node ID to be used for SDO
+        :param str mode:
+            Specify which mode should be used
+            Options: 'expedited', 'segmented', 'block-filelike'
+        :param data:
+            Data to be written to device as SDO download request
+        """
+        # TODO: Erweiterung um Abfrage von SDOs mittels Parameter-Namen - Auflösung über OD ??
 
+        self.network[node_id].sdo.RESPONSE_TIMEOUT = timeout
+        if mode=='expedited' OR mode == 'segmented':
+            # SDO download via expedited OR segmented transfer
+            self.network[node_id].sdo.download(index, subindex, data)
+        elif mode == 'block-filelike':
+            # Upload a long string via BLOCK transfer from the node via file-like access
+            self.fp = self.network[node_id].sdo.open(index, subindex, 'wb', block_transfer=True)
+            fp.write(data)
+            fp.close()
+        else:
+            print('ERROR: SDO download mode specified with unknown option')
+
+    # =====================================================================================================================================
     # def RecordSpecificID():
 
+    # =====================================================================================================================================
     # def EmcyListActive():
     
+    # =====================================================================================================================================
     # def EmcyListLog():

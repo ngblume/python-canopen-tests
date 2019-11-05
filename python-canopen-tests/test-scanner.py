@@ -11,7 +11,7 @@ import os
 EDS_PATH = os.path.join(os.path.dirname(__file__), '../00_EDS/SimNode/SimNode.eds')
 
 # Set if existing bus should be used
-USE_EXISTING_BUS = False
+USE_EXISTING_BUS = True
 
 # Set logging level
 # logging.basicConfig(level=logging.DEBUG)
@@ -24,8 +24,8 @@ def _recv_callback(can_id, data, timestamp):
 # =====================================================================================================================================
 if (USE_EXISTING_BUS == True):
     # Create bus (using SocketCAN, can0 and a bit rate of 250 kB/s)
-    can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
-    # can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
+    # can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
+    can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
 
 # =====================================================================================================================================
 # Create network_real
@@ -36,7 +36,8 @@ if (USE_EXISTING_BUS == True):
     network_real.bus = can_bus
 else:
     # Connect network_real to specific CAN bus 
-    network_real.connect(channel='can0', bustype='socketcan', bitrate=250000)
+    # network_real.connect(channel='can0', bustype='socketcan', bitrate=250000)
+    network_real.connect(channel='PCAN_USBBUS1', bustype='pcan', bitrate=250000)
 
 # Add simulated note to network_real
 remoteSimNode_0x05 = network_real.add_node(0x05, EDS_PATH)
@@ -51,7 +52,8 @@ if (USE_EXISTING_BUS == True):
     network_sim.bus = can_bus
 else:
     # Connect network_sim to same CAN bus
-    network_sim.connect(channel='can0', bustype='socketcan')
+    # network_sim.connect(channel='can0', bustype='socketcan')
+    network_sim.connect(channel='PCAN_USBBUS1', bustype='pcan', bitrate=250000)
 
 # Create simulated nodes (via network_sim) > called "local"
 localSimNode_0x05 = network_sim.create_node(0x05, EDS_PATH)
