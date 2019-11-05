@@ -102,7 +102,7 @@ SubNumber=1
 [2001Sub0]
 ParameterName=Temperature
 ObjectType=0x7
-DataType=0x0008
-AccessType=ro
+DataType=0x0007
+AccessType=rw
 DefaultValue=0
 PDOMapping=0

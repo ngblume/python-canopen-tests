@@ -111,6 +111,18 @@ print('Manufacturer Device Name on Node 0x05 - with node_id: ', manufacturer_dev
 
 # ==================================================================
 
+# SDO Upload - Expedited Transfer - WITH RETURNED OBJECT
+device_type_direct_node_0x05 = remote_node_0x05.sdo[0x1000].raw
+print('Device Type on Node 0x05 - with returned object: ', '0x%0*X' % (8,device_type_direct_node_0x05))
+
+# SDO Upload - Expedited Transfer - WITH NODE ID
+device_type_id_node_0x05 = interface.SDO_Upload(node_id=0x05, mode='expedited', index=0x1000, subindex=0x00, timeout=2.0)
+# Data is Bytes and needs to be converted an integer (little endian)
+device_type_id_node_0x05 = int.from_bytes(device_type_id_node_0x05, byteorder='little', signed=False)
+print('Device Type on Node 0x05 - with node_id : ', '0x%0*X' % (8,device_type_id_node_0x05))
+
+# ==================================================================
+
 # Disconnect from network
 interface.Disconnect
 
