@@ -58,7 +58,7 @@ SupportedObjects=1
 ParameterName=Device type
 ObjectType=0x7
 DataType=0x0007
-AccessType=ro
+AccessType=rw
 DefaultValue=0x000000FF
 PDOMapping=0
 
