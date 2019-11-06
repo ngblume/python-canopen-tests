@@ -105,10 +105,10 @@ if SIM_NETWORK:
     localSimNode_0x03 = network_sim.create_node(0x03, SIM_EDS_PATH)
 
     # Set Index 0x1000-Subindex 0x00, which is scanned by scanner.search()
-    localSimNode_0x03.sdo[0x1000].raw = 0x00000022
+    # Set in EDS file - localSimNode_0x03.sdo[0x1000].raw = 0x00000022
 
     # Set "Manufacturer Device Name" (index via EDS file), which is later readback
-    localSimNode_0x03.sdo['Manufacturer Device Name'].raw = 'SimNode-0x03'
+    # Set in EDS file - localSimNode_0x03.sdo['Manufacturer Device Name'].raw = 'SimNode-0x03'
 
     print('Transistion node to OPERATIONAL state ...')
     # Heartbeat and similar tests
@@ -117,6 +117,7 @@ if SIM_NETWORK:
     time.sleep(1)
 
     # When node transistions from INITIALISING to PRE-OPERATIONAL, heartbeat will start automatically with current value of 0x1017
+	localSimNode_0x03.sdo[0x1017].raw = 0x000005DC
     localSimNode_0x03.nmt.state = 'PRE-OPERATIONAL'
     time.sleep(1)
 

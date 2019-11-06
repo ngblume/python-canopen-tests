@@ -2,10 +2,10 @@
 CreatedBy=NGB
 ModifiedBy=NGB
 Description=SimNode for testing
-CreationTime=11:01PM
-CreationDate=11-02-2019
-ModificationTime=11:01PM
-ModificationDate=11-02-2019
+CreationTime=12:39AM
+CreationDate=11-07-2019
+ModificationTime=12:39AM
+ModificationDate=11-07-2019
 FileName=SimNode.eds
 FileVersion=1
 FileRevision=1
@@ -33,7 +33,7 @@ DynamicChannelsSupported=0
 CompactPDO=0
 GroupMessaging=0
 NrOfRXPDO=0
-NrOfTXPDO=0
+NrOfTXPDO=2
 LSS_Supported=0
 
 [DummyUsage]
@@ -51,27 +51,108 @@ Line1=EDS File for python canopen
 Line2=Use for testing only
 
 [MandatoryObjects]
-SupportedObjects=1
+SupportedObjects=3
 1=0x1000
+2=0x1001
+3=0x1018
 
 [1000]
 ParameterName=Device type
 ObjectType=0x7
 DataType=0x0007
-AccessType=rw
+AccessType=ro
 DefaultValue=0x000000FF
 PDOMapping=0
 
+[1001]
+ParameterName=Error Register
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+PDOMapping=1
+
+[1018]
+ParameterName=Identity Object
+ObjectType=0x9
+SubNumber=5
+
+[1018sub0]
+ParameterName=Number of entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+DefaultValue=4
+PDOMapping=0
+LowLimit=1
+HighLimit=4
+
+[1018sub1]
+ParameterName=Vendor Id
+ObjectType=0x7
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[1018sub2]
+ParameterName=Product Code
+ObjectType=0x7
+DataType=0x0007
+AccessType=ro
+DefaultValue=154
+PDOMapping=0
+
+[1018sub3]
+ParameterName=Revision number
+ObjectType=0x7
+DataType=0x0007
+AccessType=ro
+DefaultValue=0
+PDOMapping=0
+
+[1018sub4]
+ParameterName=Serial number
+ObjectType=0x7
+DataType=0x0007
+AccessType=ro
+DefaultValue=296472047
+PDOMapping=0
+
 [OptionalObjects]
-SupportedObjects=2
+SupportedObjects=10
 1=0x1008
-2=0x1017
+2=0x1009
+3=0x100A
+4=0x1017
+5=0x1800
+6=0x1801
+7=0x1A00
+8=0x1A01
+9=0x6001
+10=0x6011
 
 [1008]
 ParameterName=Manufacturer Device Name
 ObjectType=0x7
 DataType=0x0009
-AccessType=rw
+AccessType=const
+DefaultValue=embeX-SimNode
+PDOMapping=0
+
+[1009]
+ParameterName=Manufacturer Hardware Version
+ObjectType=0x7
+DataType=0x0009
+AccessType=const
+DefaultValue=V0.3.4
+PDOMapping=0
+
+[100A]
+ParameterName=Manufacturer Software Version
+ObjectType=0x7
+DataType=0x0009
+AccessType=const
+DefaultValue=V1.8.2
 PDOMapping=0
 
 [1017]
@@ -79,30 +160,342 @@ ParameterName=Producer Heartbeat Time
 ObjectType=0x7
 DataType=0x0006
 AccessType=rw
-DefaultValue=1500
+DefaultValue=0
 PDOMapping=0
+
+[1800]
+ParameterName=Transmit PDO Communication Parameter 0
+ObjectType=0x9
+SubNumber=7
+
+[1800sub0]
+ParameterName=Number of entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+DefaultValue=6
+PDOMapping=0
+LowLimit=0x02
+HighLimit=0x06
+
+[1800sub1]
+ParameterName=COB ID
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=$NODEID+0x180
+PDOMapping=0
+LowLimit=0x00000001
+HighLimit=0xFFFFFFFF
+
+[1800sub2]
+ParameterName=Transmission Type
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+DefaultValue=0xFF
+PDOMapping=0
+
+[1800sub3]
+ParameterName=Inhibit Time
+ObjectType=0x7
+DataType=0x0006
+AccessType=rw
+DefaultValue=500
+PDOMapping=0
+
+[1800sub4]
+ParameterName=Compatibility Entry
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+PDOMapping=0
+
+[1800sub5]
+ParameterName=Event Timer
+ObjectType=0x7
+DataType=0x0006
+AccessType=rw
+DefaultValue=780
+PDOMapping=0
+
+[1800sub6]
+ParameterName=SYNC start value
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+DefaultValue=0
+PDOMapping=0
+
+[1801]
+ParameterName=Transmit PDO Communication Parameter 1
+ObjectType=0x9
+SubNumber=7
+
+[1801sub0]
+ParameterName=Number of entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+DefaultValue=6
+PDOMapping=0
+LowLimit=0x02
+HighLimit=0x06
+
+[1801sub1]
+ParameterName=COB ID
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=$NODEID+0x280
+PDOMapping=0
+LowLimit=0x00000001
+HighLimit=0xFFFFFFFF
+
+[1801sub2]
+ParameterName=Transmission Type
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+DefaultValue=0xFF
+PDOMapping=0
+
+[1801sub3]
+ParameterName=Inhibit Time
+ObjectType=0x7
+DataType=0x0006
+AccessType=rw
+DefaultValue=500
+PDOMapping=0
+
+[1801sub4]
+ParameterName=Compatibility Entry
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+PDOMapping=0
+
+[1801sub5]
+ParameterName=Event Timer
+ObjectType=0x7
+DataType=0x0006
+AccessType=rw
+DefaultValue=980
+PDOMapping=0
+
+[1801sub6]
+ParameterName=SYNC start value
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+DefaultValue=0
+PDOMapping=0
+
+[1A00]
+ParameterName=Transmit PDO Mapping Parameter 0
+ObjectType=0x9
+SubNumber=9
+
+[1A00sub0]
+ParameterName=Number of entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+DefaultValue=3
+PDOMapping=0
+LowLimit=0
+HighLimit=8
+
+[1A00sub1]
+ParameterName=PDO Mapping Entry_1
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x60010108
+PDOMapping=0
+
+[1A00sub2]
+ParameterName=PDO Mapping Entry_2
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x10010008
+PDOMapping=0
+
+[1A00sub3]
+ParameterName=PDO Mapping Entry_3
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x60110220
+PDOMapping=0
+
+[1A00sub4]
+ParameterName=PDO Mapping Entry_4
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A00sub5]
+ParameterName=PDO Mapping Entry_5
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A00sub6]
+ParameterName=PDO Mapping Entry_6
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A00sub7]
+ParameterName=PDO Mapping Entry_7
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A00sub8]
+ParameterName=PDO Mapping Entry_8
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A01]
+ParameterName=Transmit PDO Mapping Parameter 1
+ObjectType=0x9
+SubNumber=9
+
+[1A01sub0]
+ParameterName=Number of entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=rw
+DefaultValue=2
+PDOMapping=0
+LowLimit=0
+HighLimit=8
+
+[1A01sub1]
+ParameterName=PDO Mapping Entry_1
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x60110120
+PDOMapping=0
+
+[1A01sub2]
+ParameterName=PDO Mapping Entry_2
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+DefaultValue=0x60110220
+PDOMapping=0
+
+[1A01sub3]
+ParameterName=PDO Mapping Entry_3
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A01sub4]
+ParameterName=PDO Mapping Entry_4
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A01sub5]
+ParameterName=PDO Mapping Entry_5
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A01sub6]
+ParameterName=PDO Mapping Entry_6
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A01sub7]
+ParameterName=PDO Mapping Entry_7
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[1A01sub8]
+ParameterName=PDO Mapping Entry_8
+ObjectType=0x7
+DataType=0x0007
+AccessType=rw
+PDOMapping=0
+
+[6001]
+ParameterName=DI
+ObjectType=0x8
+SubNumber=2
+
+[6001sub0]
+ParameterName=Number of Entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+DefaultValue=1
+PDOMapping=0
+
+[6001sub1]
+ParameterName=DI-InputGroup1
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+DefaultValue=106
+PDOMapping=1
+
+[6011]
+ParameterName=AI
+ObjectType=0x8
+SubNumber=3
+
+[6011sub0]
+ParameterName=Number of Entries
+ObjectType=0x7
+DataType=0x0005
+AccessType=ro
+DefaultValue=2
+PDOMapping=0
+
+[6011sub1]
+ParameterName=AI-Input1
+ObjectType=0x7
+DataType=0x0007
+AccessType=ro
+DefaultValue=16584
+PDOMapping=1
+
+[6011sub2]
+ParameterName=AI-Input2
+ObjectType=0x7
+DataType=0x0007
+AccessType=ro
+DefaultValue=9348
+PDOMapping=1
 
 [ManufacturerObjects]
 SupportedObjects=1
 1=0x2000
-2=0x2001
 
 [2000]
 ParameterName=FirmwareString
 ObjectType=0x7
 DataType=0x0009
 AccessType=rw
-PDOMapping=0
-
-[2001]
-ParameterName=ReadRawValue
-ObjectType=0x9
-SubNumber=1
-
-[2001Sub0]
-ParameterName=Temperature
-ObjectType=0x7
-DataType=0x0007
-AccessType=rw
-DefaultValue=0
+DefaultValue=embeX-Firmware
 PDOMapping=0
