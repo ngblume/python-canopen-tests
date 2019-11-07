@@ -209,7 +209,7 @@ while stop_daemon == False:
         network[node_id].tpdo[pdo_number].event_timer = 10
         network[node_id].tpdo[pdo_number].enabled = True
         # Save new PDO configuration to node
-        network[node_id].tpdo.save()
+        network[node_id].tpdo[pdo_number].save()
 
         reply_cmd = cmd
         reply_parameters['node_id'] = node_id
