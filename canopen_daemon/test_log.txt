@@ -1,0 +1,1230 @@
+DEBUG:can:can config: {'bitrate': 250000, 'channel': 'can0', 'interface': 'socketcan'}
+INFO:can.interfaces.socketcan.socketcan:Created a socket
+DEBUG:can.interfaces.socketcan.socketcan:Binding socket to channel=can0
+DEBUG:can.interfaces.socketcan.socketcan:Bound socket.
+Setting up test environment with SimNode - node_id = 0x03 ...
+DEBUG:can:can config: {'bitrate': 250000, 'channel': 'can0', 'interface': 'socketcan'}
+INFO:can.interfaces.socketcan.socketcan:Created a socket
+DEBUG:can.interfaces.socketcan.socketcan:Binding socket to channel=can0
+DEBUG:can.interfaces.socketcan.socketcan:Bound socket.
+INFO:canopen.network:Connected to 'socketcan channel 'can0''
+DEBUG:canopen.pdo:TPDO Map as 2
+DEBUG:canopen.pdo:RPDO Map as 0
+Test environment with SimNode ready ...
+CANopen - Daemon ready to receive messages ...
+Received message: {"cmd": "add_node", "parameters": {"node_id": 3, "EDS": "SimNode/SimNode.eds"}}
+{
+    "cmd": "add_node",
+    "parameters": {
+        "EDS": "SimNode/SimNode.eds",
+        "node_id": 3
+    }
+}
+Message contained CMD value:  add_node  - executing command
+DEBUG:canopen.pdo:TPDO Map as 2
+DEBUG:canopen.pdo:RPDO Map as 0
+Addind remote node:  0x3
+{3: <canopen.node.remote.RemoteNode object at 0x7fd3d2d49550>}
+{'reply_cmd': 'add_node', 'reply_parameters': {'node_id': 3}}
+Received message: {"cmd": "nmt_change_state", "parameters": {"node_id": 3, "new_state": "INITIALISING"}}
+{
+    "cmd": "nmt_change_state",
+    "parameters": {
+        "new_state": "INITIALISING",
+        "node_id": 3
+    }
+}
+Message contained CMD value:  nmt_change_state  - executing command
+INFO:canopen.nmt:Changing NMT state from INITIALISING to INITIALISING
+INFO:canopen.nmt:Sending NMT command 0x81 to node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0000    S                DLC:  2    81 03
+{'reply_cmd': 'nmt_change_state', 'reply_parameters': {'node_id': 3, 'new_state': 'INITIALISING'}}
+INFO:canopen.nmt:Node 3 received command 129
+Received message: {"cmd": "sdo_download", "parameters": {"node_id": 3, "index": 4119, "subindex": 0, "mode": "expedited", "data": 2500}}
+{
+    "cmd": "sdo_download",
+    "parameters": {
+        "data": 2500,
+        "index": 4119,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 0
+    }
+}
+Message contained CMD value:  sdo_download  - executing command
+DEBUG:canopen.variable:Writing Producer Heartbeat Time (0x1017:0) = 2500
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 17 10 00 c4 09 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1017:0
+INFO:canopen.nmt:Start the hearbeat timer, interval is 2500 ms
+DEBUG:can.interfaces.socketcan.socketcan:Sending BCM command
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 17 10 00 00 00 00 00
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 0
+{'reply_cmd': 'sdo_download', 'reply_parameters': {'index': 4119, 'subindex': 0, 'success': 1}}
+Received message: {"cmd": "nmt_change_state", "parameters": {"node_id": 3, "new_state": "PRE-OPERATIONAL"}}
+{
+    "cmd": "nmt_change_state",
+    "parameters": {
+        "new_state": "PRE-OPERATIONAL",
+        "node_id": 3
+    }
+}
+Message contained CMD value:  nmt_change_state  - executing command
+INFO:canopen.nmt:Changing NMT state from PRE-OPERATIONAL to PRE-OPERATIONAL
+INFO:canopen.nmt:Sending NMT command 0x80 to node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0000    S                DLC:  2    80 03
+{'reply_cmd': 'nmt_change_state', 'reply_parameters': {'node_id': 3, 'new_state': 'PRE-OPERATIONAL'}}
+INFO:canopen.nmt:Node 3 received command 128
+INFO:canopen.nmt:New NMT state PRE-OPERATIONAL, old state INITIALISING
+Received message: {"cmd": "pdo_config_tx", "parameters": {"node_id": 3, "pdo_number": 1, "trans_type": 255, "event_timer": 500, "enabled": true}}
+{
+    "cmd": "pdo_config_tx",
+    "parameters": {
+        "enabled": true,
+        "event_timer": 500,
+        "node_id": 3,
+        "pdo_number": 1,
+        "trans_type": 255
+    }
+}
+Message contained CMD value:  pdo_config_tx  - executing command
+DEBUG:canopen.sdo.client:Reading 0x1800:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 18 01 83 01 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.COB ID (0x1800:1) is 387
+INFO:canopen.pdo.base:COB-ID is 0x183
+INFO:canopen.pdo.base:PDO is enabled
+INFO:canopen.pdo.base:RTR is allowed
+DEBUG:canopen.sdo.client:Reading 0x1800:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 00 18 02 ff 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.Transmission Type (0x1800:2) is 255
+INFO:canopen.pdo.base:Transmission type is 255
+DEBUG:canopen.sdo.client:Reading 0x1800:3 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 03 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4b 00 18 03 f4 01 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.Inhibit Time (0x1800:3) is 500
+INFO:canopen.pdo.base:Inhibit time is set to 500 ms
+DEBUG:canopen.sdo.client:Reading 0x1800:5 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 05 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4b 00 18 05 0c 03 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.Event Timer (0x1800:5) is 780
+INFO:canopen.pdo.base:Event timer is set to 780 ms
+DEBUG:canopen.sdo.client:Reading 0x1800:6 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 00 18 06 00 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.SYNC start value (0x1800:6) is 0
+INFO:canopen.pdo.base:SYNC start value is set to 0 ms
+DEBUG:canopen.sdo.client:Reading 0x1A00:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 00 1a 00 03 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.Number of entries (0x1A00:0) is 3
+DEBUG:canopen.sdo.client:Reading 0x1A00:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 1a 01 08 01 01 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.PDO Mapping Entry_1 (0x1A00:1) is 1610678536
+INFO:canopen.pdo.base:Adding DI.DI-InputGroup1 (0x6001:1) at bits 0 - 7 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1A00:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 1a 02 08 00 01 10
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.PDO Mapping Entry_2 (0x1A00:2) is 268501000
+INFO:canopen.pdo.base:Adding Error Register (0x1001:0) at bits 8 - 15 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1A00:3 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 03 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 1a 03 20 02 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.PDO Mapping Entry_3 (0x1A00:3) is 1611727392
+INFO:canopen.pdo.base:Adding AI.AI-Input2 (0x6011:2) at bits 16 - 47 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1801:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 01 18 01 83 02 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.COB ID (0x1801:1) is 643
+INFO:canopen.pdo.base:COB-ID is 0x283
+INFO:canopen.pdo.base:PDO is enabled
+INFO:canopen.pdo.base:RTR is allowed
+DEBUG:canopen.sdo.client:Reading 0x1801:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 01 18 02 ff 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.Transmission Type (0x1801:2) is 255
+INFO:canopen.pdo.base:Transmission type is 255
+DEBUG:canopen.sdo.client:Reading 0x1801:3 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 03 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4b 01 18 03 f4 01 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.Inhibit Time (0x1801:3) is 500
+INFO:canopen.pdo.base:Inhibit time is set to 500 ms
+DEBUG:canopen.sdo.client:Reading 0x1801:5 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 05 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4b 01 18 05 d4 03 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.Event Timer (0x1801:5) is 980
+INFO:canopen.pdo.base:Event timer is set to 980 ms
+DEBUG:canopen.sdo.client:Reading 0x1801:6 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 01 18 06 00 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.SYNC start value (0x1801:6) is 0
+INFO:canopen.pdo.base:SYNC start value is set to 0 ms
+DEBUG:canopen.sdo.client:Reading 0x1A01:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A01:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 01 1a 00 02 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 1.Number of entries (0x1A01:0) is 2
+DEBUG:canopen.sdo.client:Reading 0x1A01:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 1a 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A01:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 01 1a 01 20 01 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 1.PDO Mapping Entry_1 (0x1A01:1) is 1611727136
+INFO:canopen.pdo.base:Adding AI.AI-Input1 (0x6011:1) at bits 0 - 31 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1A01:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 1a 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A01:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 01 1a 02 20 02 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 1.PDO Mapping Entry_2 (0x1A01:2) is 1611727392
+INFO:canopen.pdo.base:Adding AI.AI-Input2 (0x6011:2) at bits 32 - 63 to PDO map
+INFO:canopen.pdo.base:Adding AI.AI-Input1 (0x6011:1) at bits 0 - 31 to PDO map
+INFO:canopen.pdo.base:Adding AI.AI-Input2 (0x6011:2) at bits 32 - 63 to PDO map
+INFO:canopen.pdo.base:Setting COB-ID 0x183 and temporarily disabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.COB ID (0x1800:1) = 2147484035
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 18 01 83 01 00 80
+INFO:canopen.sdo.server:Expedited download for 0x1800:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 01 00 00 00 00
+INFO:canopen.pdo.base:Setting transmission type to 1
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.Transmission Type (0x1800:2) = 1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 18 02 01 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 02 00 00 00 00
+INFO:canopen.pdo.base:Setting inhibit time to 50000 us
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.Inhibit Time (0x1800:3) = 500
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 00 18 03 f4 01 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 03 00 00 00 00
+INFO:canopen.pdo.base:Setting event timer to 10 ms
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.Event Timer (0x1800:5) = 10
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 00 18 05 0a 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 05 00 00 00 00
+INFO:canopen.pdo.base:Setting SYNC start value to 0
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.SYNC start value (0x1800:6) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 06 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.Number of entries (0x1A00:0) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A00:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input1 (0x6011:1, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.PDO Mapping Entry_1 (0x1A00:1) = 1611727136
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 1a 01 20 01 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A00:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 01 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input2 (0x6011:2, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.PDO Mapping Entry_2 (0x1A00:2) = 1611727392
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 1a 02 20 02 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A00:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 02 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.Number of entries (0x1A00:0) = 2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 1a 00 02 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A00:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Enabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.COB ID (0x1800:1) = 387
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 18 01 83 01 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 01 00 00 00 00
+INFO:canopen.pdo.base:Setting COB-ID 0x283 and temporarily disabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.COB ID (0x1801:1) = 2147484291
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 18 01 83 02 00 80
+INFO:canopen.sdo.server:Expedited download for 0x1801:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 01 00 00 00 00
+INFO:canopen.pdo.base:Setting transmission type to 255
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.Transmission Type (0x1801:2) = 255
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 18 02 ff 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 02 00 00 00 00
+INFO:canopen.pdo.base:Setting inhibit time to 50000 us
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.Inhibit Time (0x1801:3) = 500
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 01 18 03 f4 01 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 03 00 00 00 00
+INFO:canopen.pdo.base:Setting event timer to 980 ms
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.Event Timer (0x1801:5) = 980
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 01 18 05 d4 03 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 05 00 00 00 00
+INFO:canopen.pdo.base:Setting SYNC start value to 0
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.SYNC start value (0x1801:6) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 06 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.Number of entries (0x1A01:0) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A01:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input1 (0x6011:1, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.PDO Mapping Entry_1 (0x1A01:1) = 1611727136
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 1a 01 20 01 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A01:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 01 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input2 (0x6011:2, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.PDO Mapping Entry_2 (0x1A01:2) = 1611727392
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 1a 02 20 02 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A01:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 02 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.Number of entries (0x1A01:0) = 2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 1a 00 02 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A01:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Enabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.COB ID (0x1801:1) = 643
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 18 01 83 02 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 01 00 00 00 00
+{'reply_cmd': 'pdo_config_tx', 'reply_parameters': {'node_id': 3, 'pdo_number': 1, 'trans_type': 255, 'event_timer': 500, 'enable': True}}
+Received message: {"cmd": "pdo_config_tx", "parameters": {"node_id": 3, "pdo_number": 2, "trans_type": 255, "event_timer": 1500, "enabled": true}}
+{
+    "cmd": "pdo_config_tx",
+    "parameters": {
+        "enabled": true,
+        "event_timer": 1500,
+        "node_id": 3,
+        "pdo_number": 2,
+        "trans_type": 255
+    }
+}
+Message contained CMD value:  pdo_config_tx  - executing command
+DEBUG:canopen.sdo.client:Reading 0x1800:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 18 01 83 01 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.COB ID (0x1800:1) is 387
+INFO:canopen.pdo.base:COB-ID is 0x183
+INFO:canopen.pdo.base:PDO is enabled
+INFO:canopen.pdo.base:RTR is allowed
+DEBUG:canopen.sdo.client:Reading 0x1800:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 18 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1800:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 00 18 02 01 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 0.Transmission Type (0x1800:2) is 1
+INFO:canopen.pdo.base:Transmission type is 1
+DEBUG:canopen.sdo.client:Reading 0x1A00:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 00 1a 00 02 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.Number of entries (0x1A00:0) is 2
+DEBUG:canopen.sdo.client:Reading 0x1A00:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 1a 01 20 01 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.PDO Mapping Entry_1 (0x1A00:1) is 1611727136
+INFO:canopen.pdo.base:Adding AI.AI-Input1 (0x6011:1) at bits 0 - 31 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1A00:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 1a 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A00:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 1a 02 20 02 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 0.PDO Mapping Entry_2 (0x1A00:2) is 1611727392
+INFO:canopen.pdo.base:Adding AI.AI-Input2 (0x6011:2) at bits 32 - 63 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1801:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 01 18 01 83 02 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.COB ID (0x1801:1) is 643
+INFO:canopen.pdo.base:COB-ID is 0x283
+INFO:canopen.pdo.base:PDO is enabled
+INFO:canopen.pdo.base:RTR is allowed
+DEBUG:canopen.sdo.client:Reading 0x1801:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 01 18 02 ff 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.Transmission Type (0x1801:2) is 255
+INFO:canopen.pdo.base:Transmission type is 255
+DEBUG:canopen.sdo.client:Reading 0x1801:3 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 03 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4b 01 18 03 f4 01 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.Inhibit Time (0x1801:3) is 500
+INFO:canopen.pdo.base:Inhibit time is set to 500 ms
+DEBUG:canopen.sdo.client:Reading 0x1801:5 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 05 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4b 01 18 05 d4 03 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.Event Timer (0x1801:5) is 980
+INFO:canopen.pdo.base:Event timer is set to 980 ms
+DEBUG:canopen.sdo.client:Reading 0x1801:6 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1801:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 01 18 06 00 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Communication Parameter 1.SYNC start value (0x1801:6) is 0
+INFO:canopen.pdo.base:SYNC start value is set to 0 ms
+DEBUG:canopen.sdo.client:Reading 0x1A01:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A01:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    4f 01 1a 00 02 00 00 00
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 1.Number of entries (0x1A01:0) is 2
+DEBUG:canopen.sdo.client:Reading 0x1A01:1 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 1a 01 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A01:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 01 1a 01 20 01 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 1.PDO Mapping Entry_1 (0x1A01:1) is 1611727136
+INFO:canopen.pdo.base:Adding AI.AI-Input1 (0x6011:1) at bits 0 - 31 to PDO map
+DEBUG:canopen.sdo.client:Reading 0x1A01:2 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 01 1a 02 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1A01:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 01 1a 02 20 02 11 60
+DEBUG:canopen.variable:Value of Transmit PDO Mapping Parameter 1.PDO Mapping Entry_2 (0x1A01:2) is 1611727392
+INFO:canopen.pdo.base:Adding AI.AI-Input2 (0x6011:2) at bits 32 - 63 to PDO map
+INFO:canopen.pdo.base:Adding AI.AI-Input1 (0x6011:1) at bits 0 - 31 to PDO map
+INFO:canopen.pdo.base:Adding AI.AI-Input2 (0x6011:2) at bits 32 - 63 to PDO map
+INFO:canopen.pdo.base:Setting COB-ID 0x183 and temporarily disabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.COB ID (0x1800:1) = 2147484035
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 18 01 83 01 00 80
+INFO:canopen.sdo.server:Expedited download for 0x1800:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 01 00 00 00 00
+INFO:canopen.pdo.base:Setting transmission type to 1
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.Transmission Type (0x1800:2) = 1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 18 02 01 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 02 00 00 00 00
+INFO:canopen.pdo.base:Setting inhibit time to 50000 us
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.Inhibit Time (0x1800:3) = 500
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 00 18 03 f4 01 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 03 00 00 00 00
+INFO:canopen.pdo.base:Setting event timer to 10 ms
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.Event Timer (0x1800:5) = 10
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 00 18 05 0a 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 05 00 00 00 00
+INFO:canopen.pdo.base:Setting SYNC start value to 0
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.SYNC start value (0x1800:6) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 06 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.Number of entries (0x1A00:0) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A00:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input1 (0x6011:1, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.PDO Mapping Entry_1 (0x1A00:1) = 1611727136
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 1a 01 20 01 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A00:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 01 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input2 (0x6011:2, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.PDO Mapping Entry_2 (0x1A00:2) = 1611727392
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 1a 02 20 02 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A00:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 02 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 0.Number of entries (0x1A00:0) = 2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 00 1a 00 02 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A00:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Enabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 0.COB ID (0x1800:1) = 387
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 00 18 01 83 01 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1800:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 00 18 01 00 00 00 00
+INFO:canopen.pdo.base:Setting COB-ID 0x283 and temporarily disabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.COB ID (0x1801:1) = 2147484291
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 18 01 83 02 00 80
+INFO:canopen.sdo.server:Expedited download for 0x1801:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 01 00 00 00 00
+INFO:canopen.pdo.base:Setting transmission type to 1
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.Transmission Type (0x1801:2) = 1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 18 02 01 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 02 00 00 00 00
+INFO:canopen.pdo.base:Setting inhibit time to 50000 us
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.Inhibit Time (0x1801:3) = 500
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 01 18 03 f4 01 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 03 00 00 00 00
+INFO:canopen.pdo.base:Setting event timer to 10 ms
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.Event Timer (0x1801:5) = 10
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2b 01 18 05 0a 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:5
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 05 00 00 00 00
+INFO:canopen.pdo.base:Setting SYNC start value to 0
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.SYNC start value (0x1801:6) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 18 06 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:6
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 06 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.Number of entries (0x1A01:0) = 0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 1a 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A01:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input1 (0x6011:1, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.PDO Mapping Entry_1 (0x1A01:1) = 1611727136
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 1a 01 20 01 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A01:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 01 00 00 00 00
+INFO:canopen.pdo.base:Writing AI.AI-Input2 (0x6011:2, 32 bits) to PDO map
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.PDO Mapping Entry_2 (0x1A01:2) = 1611727392
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 1a 02 20 02 11 60
+INFO:canopen.sdo.server:Expedited download for 0x1A01:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 02 00 00 00 00
+DEBUG:canopen.variable:Writing Transmit PDO Mapping Parameter 1.Number of entries (0x1A01:0) = 2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 1a 00 02 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1A01:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 1a 00 00 00 00 00
+INFO:canopen.pdo.base:Enabling PDO
+DEBUG:canopen.variable:Writing Transmit PDO Communication Parameter 1.COB ID (0x1801:1) = 643
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 01 18 01 83 02 00 00
+INFO:canopen.sdo.server:Expedited download for 0x1801:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 18 01 00 00 00 00
+{'reply_cmd': 'pdo_config_tx', 'reply_parameters': {'node_id': 3, 'pdo_number': 2, 'trans_type': 255, 'event_timer': 1500, 'enable': True}}
+Received message: {"cmd": "nmt_change_state", "parameters": {"node_id": 3, "new_state": "OPERATIONAL"}}
+{
+    "cmd": "nmt_change_state",
+    "parameters": {
+        "new_state": "OPERATIONAL",
+        "node_id": 3
+    }
+}
+Message contained CMD value:  nmt_change_state  - executing command
+INFO:canopen.nmt:Changing NMT state from PRE-OPERATIONAL to OPERATIONAL
+INFO:canopen.nmt:Sending NMT command 0x1 to node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0000    S                DLC:  2    01 03
+{'reply_cmd': 'nmt_change_state', 'reply_parameters': {'node_id': 3, 'new_state': 'OPERATIONAL'}}
+INFO:canopen.nmt:Node 3 received command 1
+INFO:canopen.nmt:New NMT state OPERATIONAL, old state PRE-OPERATIONAL
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+Received message: {"cmd": "scanner", "parameters": {}}
+{
+    "cmd": "scanner",
+    "parameters": {}
+}
+Message contained CMD value:  scanner  - executing command
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0601    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0602    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0604    S                DLC:  8    40 00 10 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1000:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 10 00 ff 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0605    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0606    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0607    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0608    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0609    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 060a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 060b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 060c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 060d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 060e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 060f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0610    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0611    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0612    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0613    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0614    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0615    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0616    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0617    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0618    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0619    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 061a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 061b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 061c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 061d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 061e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 061f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0620    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0621    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0622    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0623    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0624    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0625    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0626    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0627    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0628    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0629    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 062a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 062b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 062c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 062d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 062e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 062f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0630    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0631    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0632    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0633    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0634    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0635    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0636    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0637    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0638    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0639    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 063a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 063b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 063c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 063d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 063e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 063f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0640    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0641    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0642    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0643    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0644    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0645    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0646    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0647    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0648    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0649    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 064a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 064b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 064c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 064d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 064e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 064f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0650    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0651    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0652    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0653    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0654    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0655    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0656    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0657    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0658    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0659    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 065a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 065b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 065c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 065d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 065e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 065f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0660    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0661    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0662    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0663    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0664    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0665    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0666    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0667    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0668    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0669    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 066a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 066b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 066c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 066d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 066e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 066f    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0670    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0671    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0672    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0673    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0674    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0675    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0676    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0677    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0678    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0679    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 067a    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 067b    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 067c    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 067d    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 067e    S                DLC:  8    40 00 10 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 067f    S                DLC:  8    40 00 10 00 00 00 00 00
+Found node:  0x3
+{'reply_cmd': 'scanner', 'reply_parameters': [3]}
+Received message: {"cmd": "sync_activate_periodic", "parameters": {"sync_period": 1.5}}
+{
+    "cmd": "sync_activate_periodic",
+    "parameters": {
+        "sync_period": 1.5
+    }
+}
+Message contained CMD value:  sync_activate_periodic  - executing command
+DEBUG:can.interfaces.socketcan.socketcan:Sending BCM command
+{'reply_cmd': 'sync_activate_periodic', 'reply_parameters': {'sync_period': 1.5}}
+Received message: {"cmd": "sdo_upload", "parameters": {"node_id": 3, "index": 4096, "subindex": 0, "mode": "expedited"}}
+{
+    "cmd": "sdo_upload",
+    "parameters": {
+        "index": 4096,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 0
+    }
+}
+Message contained CMD value:  sdo_upload  - executing command
+DEBUG:canopen.sdo.client:Reading 0x1000:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 00 10 00 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1000:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 00 10 00 ff 00 00 00
+DEBUG:canopen.variable:Value of Device type (0x1000:0) is 255
+{'reply_cmd': 'sdo_upload', 'reply_parameters': {'index': 4096, 'subindex': 0, 'value': 255}}
+Received message: {"cmd": "sdo_upload", "parameters": {"node_id": 3, "index": 4104, "subindex": 0, "mode": "segmented"}}
+{
+    "cmd": "sdo_upload",
+    "parameters": {
+        "index": 4104,
+        "mode": "segmented",
+        "node_id": 3,
+        "subindex": 0
+    }
+}
+Message contained CMD value:  sdo_upload  - executing command
+DEBUG:canopen.sdo.client:Reading 0x1008:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 08 10 00 00 00 00 00
+INFO:canopen.sdo.server:Initiating segmented upload for 0x1008:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    41 08 10 00 0d 00 00 00
+DEBUG:canopen.sdo.client:Using segmented transfer of 13 bytes
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    60 00 00 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    00 65 6d 62 65 58 2d 53
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    70 00 00 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    13 69 6d 4e 6f 64 65 00
+DEBUG:canopen.variable:Value of Manufacturer Device Name (0x1008:0) is 'embeX-SimNode'
+{'reply_cmd': 'sdo_upload', 'reply_parameters': {'index': 4104, 'subindex': 0, 'value': 'embeX-SimNode'}}
+Received message: {"cmd": "sdo_upload", "parameters": {"node_id": 3, "index": 4120, "subindex": 4, "mode": "expedited"}}
+{
+    "cmd": "sdo_upload",
+    "parameters": {
+        "index": 4120,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 4
+    }
+}
+Message contained CMD value:  sdo_upload  - executing command
+DEBUG:canopen.sdo.client:Reading 0x1018:4 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 18 10 04 00 00 00 00
+INFO:canopen.sdo.server:Expedited upload for 0x1018:4
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    43 18 10 04 ef cd ab 11
+DEBUG:canopen.variable:Value of Identity Object.Serial number (0x1018:4) is 296472047
+{'reply_cmd': 'sdo_upload', 'reply_parameters': {'index': 4120, 'subindex': 4, 'value': 296472047}}
+Received message: {"cmd": "sdo_upload", "parameters": {"node_id": 3, "index": 4104, "subindex": 0, "mode": "segmented"}}
+{
+    "cmd": "sdo_upload",
+    "parameters": {
+        "index": 4104,
+        "mode": "segmented",
+        "node_id": 3,
+        "subindex": 0
+    }
+}
+Message contained CMD value:  sdo_upload  - executing command
+DEBUG:canopen.sdo.client:Reading 0x1008:0 from node 3
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    40 08 10 00 00 00 00 00
+INFO:canopen.sdo.server:Initiating segmented upload for 0x1008:0
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    41 08 10 00 0d 00 00 00
+DEBUG:canopen.sdo.client:Using segmented transfer of 13 bytes
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    60 00 00 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    00 65 6d 62 65 58 2d 53
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    70 00 00 00 00 00 00 00
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    13 69 6d 4e 6f 64 65 00
+DEBUG:canopen.variable:Value of Manufacturer Device Name (0x1008:0) is 'embeX-SimNode'
+{'reply_cmd': 'sdo_upload', 'reply_parameters': {'index': 4104, 'subindex': 0, 'value': 'embeX-SimNode'}}
+Received message: {"cmd": "sdo_download", "parameters": {"node_id": 3, "index": 24577, "subindex": 1, "mode": "expedited", "data": 1}}
+{
+    "cmd": "sdo_download",
+    "parameters": {
+        "data": 1,
+        "index": 24577,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 1
+    }
+}
+Message contained CMD value:  sdo_download  - executing command
+DEBUG:canopen.variable:Writing DI.DI-InputGroup1 (0x6001:1) = 1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 60 01 01 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x6001:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 60 01 00 00 00 00
+{'reply_cmd': 'sdo_download', 'reply_parameters': {'index': 24577, 'subindex': 1, 'success': 1}}
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+Received message: {"cmd": "sdo_download", "parameters": {"node_id": 3, "index": 24577, "subindex": 1, "mode": "expedited", "data": 31}}
+{
+    "cmd": "sdo_download",
+    "parameters": {
+        "data": 31,
+        "index": 24577,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 1
+    }
+}
+Message contained CMD value:  sdo_download  - executing command
+DEBUG:canopen.variable:Writing DI.DI-InputGroup1 (0x6001:1) = 31
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    2f 01 60 01 1f 00 00 00
+INFO:canopen.sdo.server:Expedited download for 0x6001:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 01 60 01 00 00 00 00
+{'reply_cmd': 'sdo_download', 'reply_parameters': {'index': 24577, 'subindex': 1, 'success': 1}}
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+Received message: {"cmd": "sdo_download", "parameters": {"node_id": 3, "index": 24593, "subindex": 1, "mode": "expedited", "data": 4294967295}}
+{
+    "cmd": "sdo_download",
+    "parameters": {
+        "data": 4294967295,
+        "index": 24593,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 1
+    }
+}
+Message contained CMD value:  sdo_download  - executing command
+DEBUG:canopen.variable:Writing AI.AI-Input1 (0x6011:1) = 4294967295
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 11 60 01 ff ff ff ff
+INFO:canopen.sdo.server:Expedited download for 0x6011:1
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 11 60 01 00 00 00 00
+{'reply_cmd': 'sdo_download', 'reply_parameters': {'index': 24593, 'subindex': 1, 'success': 1}}
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+Received message: {"cmd": "sdo_download", "parameters": {"node_id": 3, "index": 24593, "subindex": 2, "mode": "expedited", "data": 3154094847}}
+{
+    "cmd": "sdo_download",
+    "parameters": {
+        "data": 3154094847,
+        "index": 24593,
+        "mode": "expedited",
+        "node_id": 3,
+        "subindex": 2
+    }
+}
+Message contained CMD value:  sdo_download  - executing command
+DEBUG:canopen.variable:Writing AI.AI-Input2 (0x6011:2) = 3154094847
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0603    S                DLC:  8    23 11 60 02 ff aa ff bb
+INFO:canopen.sdo.server:Expedited download for 0x6011:2
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0583    S                DLC:  8    60 11 60 02 00 00 00 00
+{'reply_cmd': 'sdo_download', 'reply_parameters': {'index': 24593, 'subindex': 2, 'success': 1}}
+Received message: {"cmd": "sync_deactivate_periodic", "parameters": {}}
+{
+    "cmd": "sync_deactivate_periodic",
+    "parameters": {}
+}
+Message contained CMD value:  sync_deactivate_periodic  - executing command
+DEBUG:can.interfaces.socketcan.socketcan:Stopping periodic task
+{'reply_cmd': 'sync_deactivate_periodic', 'reply_parameters': {}}
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+Received message: {"cmd": "emcys_read_active", "parameters": {"node_id": 3}}
+{
+    "cmd": "emcys_read_active",
+    "parameters": {
+        "node_id": 3
+    }
+}
+Message contained CMD value:  emcys_read_active  - executing command
+{'reply_cmd': 'emcys_read_active', 'reply_parameters': {'node_id': 3, 'value': '[]'}}
+Received message: {"cmd": "emcys_read_log", "parameters": {"node_id": 3}}
+{
+    "cmd": "emcys_read_log",
+    "parameters": {
+        "node_id": 3
+    }
+}
+Message contained CMD value:  emcys_read_log  - executing command
+{'reply_cmd': 'emcys_read_log', 'reply_parameters': {'node_id': 3, 'value': '[]'}}
+Received message: {"cmd": "emcys_trigger_sim", "parameters": {}}
+{
+    "cmd": "emcys_trigger_sim",
+    "parameters": {}
+}
+Message contained CMD value:  emcys_trigger_sim  - executing command
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0083    S                DLC:  8    01 30 04 55 6e 64 65 72
+{'reply_cmd': 'emcys_trigger_sim', 'reply_parameters': {'node_id': 3, 'value': 'triggered'}}
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+Received message: {"cmd": "emcys_read_active", "parameters": {"node_id": 3}}
+{
+    "cmd": "emcys_read_active",
+    "parameters": {
+        "node_id": 3
+    }
+}
+Message contained CMD value:  emcys_read_active  - executing command
+{'reply_cmd': 'emcys_read_active', 'reply_parameters': {'node_id': 3, 'value': "[EmcyError(12289, 4, b'Under', 1573089358.359324)]"}}
+Received message: {"cmd": "emcys_read_log", "parameters": {"node_id": 3}}
+{
+    "cmd": "emcys_read_log",
+    "parameters": {
+        "node_id": 3
+    }
+}
+Message contained CMD value:  emcys_read_log  - executing command
+{'reply_cmd': 'emcys_read_log', 'reply_parameters': {'node_id': 3, 'value': "[EmcyError(12289, 4, b'Under', 1573089358.359324)]"}}
+Received message: {"cmd": "emcys_reset_sim", "parameters": {}}
+{
+    "cmd": "emcys_reset_sim",
+    "parameters": {}
+}
+Message contained CMD value:  emcys_reset_sim  - executing command
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 0083    S                DLC:  8    00 00 04 43 4c 45 41 52
+{'reply_cmd': 'emcys_reset_sim', 'reply_parameters': {'value': 'reset'}}
+Received message: {"cmd": "emcys_read_active", "parameters": {"node_id": 3}}
+{
+    "cmd": "emcys_read_active",
+    "parameters": {
+        "node_id": 3
+    }
+}
+Message contained CMD value:  emcys_read_active  - executing command
+{'reply_cmd': 'emcys_read_active', 'reply_parameters': {'node_id': 3, 'value': '[]'}}
+Received message: {"cmd": "emcys_read_log", "parameters": {"node_id": 3}}
+{
+    "cmd": "emcys_read_log",
+    "parameters": {
+        "node_id": 3
+    }
+}
+Message contained CMD value:  emcys_read_log  - executing command
+{'reply_cmd': 'emcys_read_log', 'reply_parameters': {'node_id': 3, 'value': "[EmcyError(12289, 4, b'Under', 1573089358.359324), EmcyError(0, 4, b'CLEAR', 1573089359.368442)]"}}
+Received message: {"cmd": "subscribe_next_msg", "parameters": {"can_id": 431, "timeout": 15}}
+{
+    "cmd": "subscribe_next_msg",
+    "parameters": {
+        "can_id": 431,
+        "timeout": 15
+    }
+}
+Message contained CMD value:  subscribe_next_msg  - executing command
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+DEBUG:canopen.nmt:Received heartbeat can-id 1795, state is 5
+{'reply_cmd': 'subscribe_next_msg', 'reply_parameters': {'note': 'incorrect number of msgs received'}}
+Received message: {"cmd": "can_send_msg", "parameters": {"can_id": 15, "can_bytes": [0, 0, 255, 255, 0, 0, 255, 255]}}
+{
+    "cmd": "can_send_msg",
+    "parameters": {
+        "can_bytes": [
+            0,
+            0,
+            255,
+            255,
+            0,
+            0,
+            255,
+            255
+        ],
+        "can_id": 15
+    }
+}
+Message contained CMD value:  can_send_msg  - executing command
+DEBUG:can.interfaces.socketcan.socketcan:We've been asked to write a message to the bus
+DEBUG:can.interfaces.socketcan.socketcan.tx:sending: Timestamp:        0.000000        ID: 000f    S                DLC:  8    00 00 ff ff 00 00 ff ff
+{'reply_cmd': 'can_send_msg', 'reply_parameters': {'can_id': 15, 'can_bytes': [0, 0, 255, 255, 0, 0, 255, 255]}}
+Received message: {"cmd": "turn_off", "parameters": {}}
+{
+    "cmd": "turn_off",
+    "parameters": {}
+}
+Message contained CMD value:  turn_off  - executing command
+{'reply_cmd': 'turn_off', 'reply_parameters': {}}
+DEBUG:can.interfaces.socketcan.socketcan:Closing bcm socket for channel can0
+DEBUG:can.interfaces.socketcan.socketcan:Closing raw can socket
+DEBUG:can.interfaces.socketcan.socketcan:Stopping periodic task
+DEBUG:can.interfaces.socketcan.socketcan:Closing bcm socket for channel can0
+DEBUG:can.interfaces.socketcan.socketcan:Closing raw can socket
+

@@ -54,19 +54,52 @@ socket.connect('tcp://localhost:5555')
 
 reply_dict = send_cmd('add_node', {'node_id': 0x03, 'EDS': 'SimNode/SimNode.eds'})
 
+reply_dict = send_cmd('nmt_change_state', {'node_id': 0x03, 'new_state': 'INITIALISING'})
+time.sleep(1)
+
+reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x1017, 'subindex': 0x00, 'mode': 'expedited', 'data': 2500})
+
+reply_dict = send_cmd('nmt_change_state', {'node_id': 0x03, 'new_state': 'PRE-OPERATIONAL'})
+time.sleep(1)
+
+reply_dict = send_cmd('pdo_config_tx', {'node_id': 0x03, 'pdo_number':1, 'trans_type': 254, 'event_timer': 500, 'enabled': True})
+reply_dict = send_cmd('pdo_config_tx', {'node_id': 0x03, 'pdo_number':2, 'trans_type': 254, 'event_timer': 1500, 'enabled': True})
+time.sleep(1)
+
+reply_dict = send_cmd('nmt_change_state', {'node_id': 0x03, 'new_state': 'OPERATIONAL'})
+time.sleep(1)
+
 reply_dict = send_cmd('scanner', {})
 
+reply_dict = send_cmd('sync_activate_periodic', {'sync_period': 1.5})
+
 reply_dict = send_cmd('sdo_upload', {'node_id': 0x03, 'index': 0x1000, 'subindex': 0x00, 'mode': 'expedited'})
 
 reply_dict = send_cmd('sdo_upload', {'node_id': 0x03, 'index': 0x1008, 'subindex': 0x00, 'mode': 'segmented'})
 
-reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x1000, 'subindex': 0x00, 'mode': 'expedited', 'data': 0x11111111})
+reply_dict = send_cmd('sdo_upload', {'node_id': 0x03, 'index': 0x1018, 'subindex': 0x04, 'mode': 'expedited'})
 
-reply_dict = send_cmd('sdo_upload', {'node_id': 0x03, 'index': 0x1000, 'subindex': 0x00, 'mode': 'expedited'})
-
-reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x1008, 'subindex': 0x00, 'mode': 'segmented', 'data': 'embeX Node - ID 0x03'})
+# Object is RO to arhere to CiA profile standards
+# reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x1008, 'subindex': 0x00, 'mode': 'segmented', 'data': 'embeX Node - ID 0x03'})
 
 reply_dict = send_cmd('sdo_upload', {'node_id': 0x03, 'index': 0x1008, 'subindex': 0x00, 'mode': 'segmented'})
+
+reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x6001, 'subindex': 0x01, 'mode': 'expedited', 'data': 0x01})
+
+time.sleep(5)
+
+reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x6001, 'subindex': 0x01, 'mode': 'expedited', 'data': 0x1F})
+
+time.sleep(5)
+
+reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x6011, 'subindex': 0x01, 'mode': 'expedited', 'data': 0xFFFFFFFF})
+
+time.sleep(5)
+
+reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x6011, 'subindex': 0x02, 'mode': 'expedited', 'data': 0xBBFFAAFF})
+
+reply_dict = send_cmd('sync_deactivate_periodic', {})
+time.sleep(10)
 
 reply_dict = send_cmd('emcys_read_active', {'node_id': 0x03})
 

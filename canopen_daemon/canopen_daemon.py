@@ -29,7 +29,7 @@ import can
 import zmq
 
 # Print debug infos ??
-DEBUG = False
+DEBUG = True
 
 # Use SIM-Network
 SIM_NETWORK = True
@@ -74,12 +74,12 @@ socket.bind("tcp://*:5555")
 # Init CANopen
 
 # Set logging level
-# if DEBUG:
-#     logging.basicConfig(level=logging.DEBUG)
+if DEBUG:
+    logging.basicConfig(level=logging.DEBUG)
 
 # Create bus (using SocketCAN, can0 and a bit rate of 250 kB/s)
-# can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
-can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
+can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
+# can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
 
 # Create network
 network = canopen.Network()
@@ -98,8 +98,8 @@ if SIM_NETWORK:
     network_sim = canopen.Network()
 
     # Connect network_sim to same CAN bus (but may different channel !!)
-    # network_sim.connect(channel='can0', bustype='socketcan', bitrate=250000)
-    network_sim.connect(bustype='pcan', channel='PCAN_USBBUS2', bitrate=250000)
+    network_sim.connect(channel='can0', bustype='socketcan', bitrate=250000)
+    # network_sim.connect(bustype='pcan', channel='PCAN_USBBUS2', bitrate=250000)
 
     # Create simulated nodes (via network_sim) > called "local"
     localSimNode_0x03 = network_sim.create_node(0x03, SIM_EDS_PATH)
@@ -108,25 +108,9 @@ if SIM_NETWORK:
     # Set in EDS file - localSimNode_0x03.sdo[0x1000].raw = 0x00000022
 
     # Set "Manufacturer Device Name" (index via EDS file), which is later readback
-    # Set in EDS file - localSimNode_0x03.sdo['Manufacturer Device Name'].raw = 'SimNode-0x03'
-
-    print('Transistion node to OPERATIONAL state ...')
-    # Heartbeat and similar tests
-    # Set nodes to different states for both nodes with different timing
-    localSimNode_0x03.nmt.state = 'INITIALISING'
-    time.sleep(1)
-
-    # When node transistions from INITIALISING to PRE-OPERATIONAL, heartbeat will start automatically with current value of 0x1017
-	localSimNode_0x03.sdo[0x1017].raw = 0x000005DC
-    localSimNode_0x03.nmt.state = 'PRE-OPERATIONAL'
-    time.sleep(1)
-
-    # Transition node to OPERATIONAL
-    localSimNode_0x03.nmt.state = 'OPERATIONAL'
+    # Set in EDS file - localSimNode_0x03.sdo['Manufacturer Device Name'].raw = 'SimNode-0x03
 
     print('Test environment with SimNode ready ...')
-
-    
 
 # ================================================================================
 # Main (will be left via a CMD)
@@ -197,6 +181,42 @@ while stop_daemon == False:
                 print('Found node: ', hex(node_id))
         reply_cmd = 'scanner'
         reply_parameters = network.scanner.nodes
+
+    # ===========================================================
+    # Control NMT
+    elif cmd == 'nmt_change_state':
+        node_id = parameters.get('node_id', 0x00)
+        new_state = parameters.get('new_state', 'INITIALISING')
+        network[node_id].nmt.state = new_state
+        reply_cmd = cmd
+        reply_parameters['node_id'] = node_id
+        reply_parameters['new_state'] = new_state
+
+    # ===========================================================
+    # Config TX-PDO
+    elif cmd == 'pdo_config_tx':
+        node_id = parameters.get('node_id', 0x00)
+        pdo_number = parameters.get('pdo_number', 1)
+        trans_type = parameters.get('trans_type', 0xFF)
+        event_timer = parameters.get('event_timer', 1500)
+        enabled = parameters.get('enabled', False)
+
+        network[node_id].tpdo.read()
+        network[node_id].tpdo[pdo_number].clear()
+        network[node_id].tpdo[pdo_number].add_variable(0x6011, 1)
+        network[node_id].tpdo[pdo_number].add_variable(0x6011, 2)
+        network[node_id].tpdo[pdo_number].trans_type = 1
+        network[node_id].tpdo[pdo_number].event_timer = 10
+        network[node_id].tpdo[pdo_number].enabled = True
+        # Save new PDO configuration to node
+        network[node_id].tpdo.save()
+
+        reply_cmd = cmd
+        reply_parameters['node_id'] = node_id
+        reply_parameters['pdo_number'] = pdo_number
+        reply_parameters['trans_type'] = trans_type
+        reply_parameters['event_timer'] = event_timer
+        reply_parameters['enable'] = enabled
 
     # ===========================================================
     # SDO Upload
@@ -301,6 +321,20 @@ while stop_daemon == False:
             reply_parameters['subscribe_msg_timestamp'] = subscribe_msg_timestamp
         else:
             reply_parameters['note'] = 'incorrect number of msgs received'
+
+    # ===========================================================
+    # Activate periodic SYNC
+    elif cmd == 'sync_activate_periodic':
+        sync_period = parameters.get('sync_period', 5)
+        network.sync.start(period=sync_period)
+        reply_cmd = cmd
+        reply_parameters['sync_period'] = sync_period
+
+    # ===========================================================
+    # Deactivate periodic SYNC
+    elif cmd == 'sync_deactivate_periodic':
+        network.sync.stop()
+        reply_cmd = cmd
 
     # ===========================================================
     # Send raw CAN message
