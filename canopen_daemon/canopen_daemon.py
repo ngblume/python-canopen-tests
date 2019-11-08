@@ -29,7 +29,7 @@ import can
 import zmq
 
 # Print debug infos ??
-DEBUG = True
+DEBUG = False
 
 # Use SIM-Network
 SIM_NETWORK = True
@@ -109,6 +109,11 @@ if SIM_NETWORK:
 
     # Set "Manufacturer Device Name" (index via EDS file), which is later readback
     # Set in EDS file - localSimNode_0x03.sdo['Manufacturer Device Name'].raw = 'SimNode-0x03
+
+    # Set objects to none-zero values
+    localSimNode_0x03.sdo[0x6001][0x01].raw = 0x2E
+    localSimNode_0x03.sdo[0x6011][0x01].raw = 0x1A2B3C4D
+    localSimNode_0x03.sdo[0x6011][0x02].raw = 0x5E6FAABB
 
     print('Test environment with SimNode ready ...')
 
@@ -217,6 +222,22 @@ while stop_daemon == False:
         reply_parameters['trans_type'] = trans_type
         reply_parameters['event_timer'] = event_timer
         reply_parameters['enable'] = enabled
+
+    # ===========================================================
+    # Start TX-PDO
+    elif cmd == 'pdo_start_tx':
+        node_id = parameters.get('node_id', 0x00)
+        pdo_number = parameters.get('pdo_number', 1)
+        period = parameters.get('period', 5)
+
+        network[node_id].tpdo.read()
+        # Start TX-PDO
+        network[node_id].tpdo[pdo_number].start(period=period)
+
+        reply_cmd = cmd
+        reply_parameters['node_id'] = node_id
+        reply_parameters['pdo_number'] = pdo_number
+        reply_parameters['period'] = period
 
     # ===========================================================
     # SDO Upload

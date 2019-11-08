@@ -62,8 +62,10 @@ reply_dict = send_cmd('sdo_download', {'node_id': 0x03, 'index': 0x1017, 'subind
 reply_dict = send_cmd('nmt_change_state', {'node_id': 0x03, 'new_state': 'PRE-OPERATIONAL'})
 time.sleep(1)
 
-reply_dict = send_cmd('pdo_config_tx', {'node_id': 0x03, 'pdo_number':1, 'trans_type': 254, 'event_timer': 500, 'enabled': True})
-reply_dict = send_cmd('pdo_config_tx', {'node_id': 0x03, 'pdo_number':2, 'trans_type': 254, 'event_timer': 1500, 'enabled': True})
+reply_dict = send_cmd('pdo_start_tx', {'node_id': 0x03, 'pdo_number':1, 'period': 2.5})
+time.sleep(1)
+
+reply_dict = send_cmd('pdo_start_tx', {'node_id': 0x03, 'pdo_number':2, 'period': 4.5})
 time.sleep(1)
 
 reply_dict = send_cmd('nmt_change_state', {'node_id': 0x03, 'new_state': 'OPERATIONAL'})
