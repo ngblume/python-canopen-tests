@@ -198,48 +198,6 @@ while stop_daemon == False:
         reply_parameters['new_state'] = new_state
 
     # ===========================================================
-    # Config TX-PDO
-    elif cmd == 'pdo_config_tx':
-        node_id = parameters.get('node_id', 0x00)
-        pdo_number = parameters.get('pdo_number', 1)
-        trans_type = parameters.get('trans_type', 0xFF)
-        event_timer = parameters.get('event_timer', 1500)
-        enabled = parameters.get('enabled', False)
-
-        network[node_id].tpdo.read()
-        network[node_id].tpdo[pdo_number].clear()
-        network[node_id].tpdo[pdo_number].add_variable(0x6011, 1)
-        network[node_id].tpdo[pdo_number].add_variable(0x6011, 2)
-        network[node_id].tpdo[pdo_number].trans_type = 1
-        network[node_id].tpdo[pdo_number].event_timer = 10
-        network[node_id].tpdo[pdo_number].enabled = True
-        # Save new PDO configuration to node
-        network[node_id].tpdo[pdo_number].save()
-
-        reply_cmd = cmd
-        reply_parameters['node_id'] = node_id
-        reply_parameters['pdo_number'] = pdo_number
-        reply_parameters['trans_type'] = trans_type
-        reply_parameters['event_timer'] = event_timer
-        reply_parameters['enable'] = enabled
-
-    # ===========================================================
-    # Start TX-PDO
-    elif cmd == 'pdo_start_tx':
-        node_id = parameters.get('node_id', 0x00)
-        pdo_number = parameters.get('pdo_number', 1)
-        period = parameters.get('period', 5)
-
-        network[node_id].tpdo.read()
-        # Start TX-PDO
-        network[node_id].tpdo[pdo_number].start(period=period)
-
-        reply_cmd = cmd
-        reply_parameters['node_id'] = node_id
-        reply_parameters['pdo_number'] = pdo_number
-        reply_parameters['period'] = period
-
-    # ===========================================================
     # SDO Upload
     elif cmd == 'sdo_upload':
         node_id = parameters.get('node_id', 0x00)
@@ -381,7 +339,53 @@ while stop_daemon == False:
         localSimNode_0x03.emcy.reset(register=4, data=b"CLEAR")
         reply_cmd = cmd
         reply_parameters['value'] = 'reset'
+    
+    # ===========================================================
+    # ===========================================================
+    # UNTESTED !!!!
+    # ===========================================================
+    # Config TX-PDO
+    elif cmd == 'pdo_config_tx':
+        node_id = parameters.get('node_id', 0x00)
+        pdo_number = parameters.get('pdo_number', 1)
+        trans_type = parameters.get('trans_type', 0xFF)
+        event_timer = parameters.get('event_timer', 1500)
+        enabled = parameters.get('enabled', False)
 
+        network[node_id].tpdo.read()
+        network[node_id].tpdo[pdo_number].clear()
+        network[node_id].tpdo[pdo_number].add_variable(0x6011, 1)
+        network[node_id].tpdo[pdo_number].add_variable(0x6011, 2)
+        network[node_id].tpdo[pdo_number].trans_type = 1
+        network[node_id].tpdo[pdo_number].event_timer = 10
+        network[node_id].tpdo[pdo_number].enabled = True
+        # Save new PDO configuration to node
+        network[node_id].tpdo[pdo_number].save()
+
+        reply_cmd = cmd
+        reply_parameters['node_id'] = node_id
+        reply_parameters['pdo_number'] = pdo_number
+        reply_parameters['trans_type'] = trans_type
+        reply_parameters['event_timer'] = event_timer
+        reply_parameters['enable'] = enabled
+
+    # ===========================================================
+    # Start TX-PDO
+    elif cmd == 'pdo_start_tx':
+        node_id = parameters.get('node_id', 0x00)
+        pdo_number = parameters.get('pdo_number', 1)
+        period = parameters.get('period', 5)
+
+        network[node_id].tpdo.read()
+        # Start TX-PDO
+        network[node_id].tpdo[pdo_number].start(period=period)
+
+        reply_cmd = cmd
+        reply_parameters['node_id'] = node_id
+        reply_parameters['pdo_number'] = pdo_number
+        reply_parameters['period'] = period
+    
+    # ===========================================================
     # ===========================================================
     # Unknown CMD
     else:
