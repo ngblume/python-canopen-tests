@@ -78,8 +78,8 @@ if DEBUG:
     logging.basicConfig(level=logging.DEBUG)
 
 # Create bus (using SocketCAN, can0 and a bit rate of 250 kB/s)
-can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
-# can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
+# can_bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=250000)
+can_bus = can.interface.Bus(bustype='pcan', channel='PCAN_USBBUS1', bitrate=250000)
 
 # Create network
 network = canopen.Network()
@@ -98,8 +98,8 @@ if SIM_NETWORK:
     network_sim = canopen.Network()
 
     # Connect network_sim to same CAN bus (but may different channel !!)
-    network_sim.connect(channel='can0', bustype='socketcan', bitrate=250000)
-    # network_sim.connect(bustype='pcan', channel='PCAN_USBBUS2', bitrate=250000)
+    # network_sim.connect(channel='can0', bustype='socketcan', bitrate=250000)
+    network_sim.connect(bustype='pcan', channel='PCAN_USBBUS2', bitrate=250000)
 
     # Create simulated nodes (via network_sim) > called "local"
     localSimNode_0x03 = network_sim.create_node(0x03, SIM_EDS_PATH)
